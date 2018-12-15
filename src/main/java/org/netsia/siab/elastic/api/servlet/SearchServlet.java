@@ -75,59 +75,56 @@ public class SearchServlet extends HttpServlet {
 				Query query = new Query();
 				Bool boolObject = new Bool();
 
-				Filter filter[] = new Filter[3];
-				filter[0] = new Filter();
-				filter[1] = new Filter();
-				filter[2] = new Filter();
-
-
 				Term term = new Term();
 				term.setKafka_topic("onu.events");
 
-				Range range1 = new Range();
-				Criteria timeStamp = new Criteria();
-				timeStamp.setGte("" + incomingQueryParameters.getStartTimeStamp());
-				range1.setTimestamp(timeStamp);
-				Range range2 = new Range();
-				Criteria timeStamp2 = new Criteria();
-				timeStamp2.setLte("" + incomingQueryParameters.getEndTimeStamp());
-				range2.setTimestamp(timeStamp2);
+				if (incomingQueryParameters.getStartTimeStamp() != 0) {
+					Range range1 = new Range();
+					Criteria timeStamp = new Criteria();
+					timeStamp.setGte("" + incomingQueryParameters.getStartTimeStamp());
+					range1.setTimestamp(timeStamp);
+					Filter filter2 = new Filter();
+					filter2.setRange(range1);
+					boolObject.getFilterList().add(filter2);
+				}
 
-				filter[0].setTerm(term);
-				filter[1].setRange(range1);
-				filter[2].setRange(range2);
+				if (incomingQueryParameters.getEndTimeStamp() != 0) {
+					Range range2 = new Range();
+					Criteria timeStamp2 = new Criteria();
+					timeStamp2.setLte("" + incomingQueryParameters.getEndTimeStamp());
+					range2.setTimestamp(timeStamp2);
+					Filter filter3 = new Filter();
+					filter3.setRange(range2);
+					boolObject.getFilterList().add(filter3);
+				}
 
+				Filter filter = new Filter();
+				filter.setTerm(term);
+				boolObject.getFilterList().add(filter);
 
-				Must must[] = new Must[2];
-				must[0] = new Must();
-				must[1] = new Must();
-
-				Match match1 = new Match();
-				match1.setSerial_number(incomingQueryParameters.getResource());
+				if (incomingQueryParameters.getResource() != null) {
+					Match match1 = new Match();
+					match1.setSerial_number(incomingQueryParameters.getResource());
+					Must must = new Must();
+					must.setMatch(match1);
+					boolObject.getMustList().add(must);
+					boolObject.getMustList().add(must);
+				}
 
 				Match match2 = new Match();
 				match2.setType("cord-kafka");
-
-				must[0].setMatch(match1);
-				must[1].setMatch(match2);
-
-
-
-				boolObject.setFilterArray(filter);
-				boolObject.setMustArray(must);
-
-
+				Must must2 = new Must();
+				must2.setMatch(match2);
+				boolObject.getMustList().add(must2);
 				query.setBool(boolObject);
 				Elastic elastic = new Elastic();
 				elastic.setQuery(query);
-
 
 				Gson gson = new Gson();
 				String generatedJsonString = gson.toJson(elastic);
 
 				logger.debug("Build Json String as :" + generatedJsonString);
-				
-				
+
 			}
 
 			elasticClient.sendGet(ConfigurationManager.getInstance().getElasticApiUrl(), jsonBody);

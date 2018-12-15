@@ -1,26 +1,29 @@
 package org.netsia.siab.elastic.generated;
 
+import java.util.ArrayList;
+
 public class Bool {
 
-	private Must[] must;
+	private ArrayList<Must> must = new ArrayList<>();
 
-	private Filter[] filter;
+	private ArrayList<Filter> filter = new ArrayList<>();
 
-	public Must[] getMustArray() {
+	public ArrayList<Must> getMustList() {
 		return must;
 	}
 
-	public void setMustArray(Must[] mustArray) {
-		this.must = mustArray;
+	public void setMustList(ArrayList<Must> must) {
+		this.must = must;
 	}
 
-	public Filter[] getFilterArray() {
+	public ArrayList<Filter> getFilterList() {
 		return filter;
 	}
 
-	public void setFilterArray(Filter[] filterArray) {
-		this.filter = filterArray;
+	public void setFilterList(ArrayList<Filter> filter) {
+		this.filter = filter;
 	}
+
 
 	// ArrayList<Object> must = new ArrayList<Object>();
 	// ArrayList<Object> filter = new ArrayList<Object>();
