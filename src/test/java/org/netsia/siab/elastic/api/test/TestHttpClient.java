@@ -31,6 +31,10 @@ public class TestHttpClient {
 	public static void main(String[] args) throws Exception {
 		TestHttpClient httpClient = new TestHttpClient();
 
+		// String servletUrl = "http://10.1.50.27:32111/search";
+
+		// String servletUrl = "http://10.1.50.27:30601/search";
+
 		String servletUrl = "http://localhost:8080/search";
 
 		String resource = "PSMO12345678"; // onu serial number
@@ -40,10 +44,9 @@ public class TestHttpClient {
 
 		// String granularity="1d"; //1month //1hour //1ms //5min //7d
 
-		// ApiQueryParameters query = new ApiQueryParameters(resource, startTimestamp,
-		// endTimestamp);
+		ApiQueryParameters query = new ApiQueryParameters(resource, startTimestamp, endTimestamp);
 
-		ApiQueryParameters query = new ApiQueryParameters(resource);
+		// ApiQueryParameters query = new ApiQueryParameters(resource);
 
 		Gson gson = new Gson();
 		String jsonBody = gson.toJson(query);
@@ -58,8 +61,9 @@ public class TestHttpClient {
 	public String sendGet(String url) throws Exception {
 
 		URL obj = new URL(url);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		con.setDoOutput(true);
 		con.setRequestMethod("GET");
 
 		// add request header

@@ -40,7 +40,7 @@ public class ElasticClient {
 		// url = url + "/logstash-2018.11.27/_search";
 		URL obj = new URL(url);
 		HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
-
+		connection.setDoOutput(true);
 		connection.setRequestMethod("GET");
 
 		// add request header
