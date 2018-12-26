@@ -52,6 +52,7 @@ public class ElasticClient {
 
 
 		logger.debug("jsonBody:" + jsonBody);
+		System.out.println("jsonBody:" + jsonBody);
 
 		wr.write(jsonBody.getBytes("UTF-8"));
 		wr.flush();
@@ -75,6 +76,8 @@ public class ElasticClient {
 		}
 
 		logger.debug(response.toString());
+
+		System.out.println(response.toString());
 
 		return response.toString();
 	}

@@ -2,6 +2,7 @@ package org.netsia.siab.elastic.api.servlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -56,7 +57,18 @@ public class SearchServlet extends HttpServlet {
 
 			String generatedJsonString = NetsiaJSonParser.generateJsonForElasticSearch(incomingQueryParameters);
 
-			elasticClient.sendGet(ConfigurationManager.getInstance().getElasticApiUrl(), generatedJsonString);
+			String searchResult = elasticClient.sendGet(ConfigurationManager.getInstance().getElasticApiUrl(),
+					generatedJsonString);
+
+			System.out.println("Response sending back to Client...");
+
+			response.setContentType("application/json");
+			response.setStatus(HttpServletResponse.SC_OK);
+			PrintWriter out = response.getWriter();
+			out.println(searchResult);
+
+			System.out.println("Response is sent!");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -31,11 +31,11 @@ public class TestHttpClient {
 	public static void main(String[] args) throws Exception {
 		TestHttpClient httpClient = new TestHttpClient();
 
-		// String servletUrl = "http://10.1.50.27:32111/search";
+		String servletUrl = "http://10.1.50.27:31120/search";
 
-		// String servletUrl = "http://10.1.50.27:30601/search";
+		// String servletUrl = "http://10.1.50.27:32025/search";
 
-		String servletUrl = "http://localhost:8080/search";
+		//String servletUrl = "http://localhost:8085/search";
 
 		String resource = "PSMO12345678"; // onu serial number
 
