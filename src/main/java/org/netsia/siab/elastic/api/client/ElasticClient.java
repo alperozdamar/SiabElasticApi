@@ -68,8 +68,8 @@ public class ElasticClient {
 		wr.close();
 
 		int responseCode = connection.getResponseCode();
-		logger.debug("\nSending 'POST' request to URL : " + url);
-		logger.debug("Response Code : " + responseCode);
+		System.out.println("\nSending 'POST' request to URL : " + url);
+		System.out.println("Response Code : " + responseCode);
 
 		StringBuffer response = new StringBuffer();
 		if (responseCode == 200) {
