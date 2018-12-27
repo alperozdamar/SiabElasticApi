@@ -1,0 +1,5 @@
+target/test-classes/org/netsia/siab/elastic/api/test/SiabJUnitTest.class
+target/surefire-reports/org.netsia.siab.elastic.api.test.SiabJUnitTest.txt
+target/surefire-reports/TEST-org.netsia.siab.elastic.api.test.SiabJUnitTest.xml
+target/siab-elastic-api-0.0.1-SNAPSHOT.jar
+target/maven-archiver/pom.properties
