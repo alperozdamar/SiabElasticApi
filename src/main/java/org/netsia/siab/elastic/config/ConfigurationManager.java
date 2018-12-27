@@ -56,6 +56,9 @@ public class ConfigurationManager {
 				logger.debug("elastic.api.url:" + elasticApiUrl);
 				logger.debug("serverPort:" + serverPort);
 
+				System.out.println("elastic.api.url:" + elasticApiUrl);
+				System.out.println("serverPort:" + serverPort);
+
 			} catch (Exception e) {
 				serverPort = 7070;
 				e.printStackTrace();
