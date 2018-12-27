@@ -24,7 +24,7 @@ public class ConfigurationManager {
 
 	private int serverPort = 7070;
 
-	private String elasticApiUrl = "http://10.1.50.27:30601"; // http://10.1.50.27:30601
+	private String elasticApiUrl = "http://10.1.50.27:31438"; // http://10.1.50.27:30601
 
 	private ConfigurationManager() {
 		readConfigFile();
@@ -49,7 +49,9 @@ public class ConfigurationManager {
 				String serverPortString = props.getProperty("searchServerPort").trim();
 				serverPort = (serverPortString == null) ? 7070 : Integer.parseInt(serverPortString);
 
-				String elasticApiUrl = props.getProperty("elastic.api.url").trim();
+				String elasticApiUrlString = props.getProperty("elastic.api.url").trim();
+
+				elasticApiUrl = elasticApiUrlString;
 
 				logger.debug("elastic.api.url:" + elasticApiUrl);
 				logger.debug("serverPort:" + serverPort);

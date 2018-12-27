@@ -37,16 +37,25 @@ public class ElasticClient {
 	public String sendGet(String url, String jsonBody) throws Exception {
 
 		url = url + "/*/_search";
+
+		// url = url + "/logstash-2018.12.26/_search";
+
+		// url = url + "/api/console/proxy?path=/*/_search&method=POST";
+
+		System.out.println("url:" + url);
+
 		// url = url + "/logstash-2018.11.27/_search";
 		URL obj = new URL(url);
 		HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
 		
-		connection.setDoOutput(true); 
+		connection.setDoOutput(true);
 		
-		connection.setRequestMethod("GET");
+		connection.setRequestMethod("POST");
+
+		connection.setRequestProperty("Content-Type", "application/json");
 
 		// add request header
-		connection.setRequestProperty("User-Agent", USER_AGENT);
+		// connection.setRequestProperty("User-Agent", USER_AGENT);
 
 		DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
 
@@ -59,7 +68,7 @@ public class ElasticClient {
 		wr.close();
 
 		int responseCode = connection.getResponseCode();
-		logger.debug("\nSending 'GET' request to URL : " + url);
+		logger.debug("\nSending 'POST' request to URL : " + url);
 		logger.debug("Response Code : " + responseCode);
 
 		StringBuffer response = new StringBuffer();
