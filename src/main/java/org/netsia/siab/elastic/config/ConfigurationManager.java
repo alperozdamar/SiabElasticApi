@@ -24,7 +24,10 @@ public class ConfigurationManager {
 
 	private int serverPort = 7070;
 
-	private String elasticApiUrl = "http://10.1.50.27:31438"; // http://10.1.50.27:30601
+	// private String elasticApiUrl = "http://10.1.50.27:31438"; //
+	// http://10.1.50.27:30601
+
+	private String elasticApiUrl = "http://logging-elasticsearch-client";
 
 	private ConfigurationManager() {
 		readConfigFile();
