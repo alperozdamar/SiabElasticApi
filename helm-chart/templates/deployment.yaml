@@ -1,0 +1,38 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "siab-elastic-api.fullname" . }}
+  labels:
+    app: {{ include "siab-elastic-api.name" . }}
+    chart: {{ include "siab-elastic-api.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "siab-elastic-api.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "siab-elastic-api.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8085
+              protocol: TCP
+          volumeMounts:
+            - name: siab-elastic-api-config
+              mountPath: /resources/siabElasticApi.properties
+              subPath: siabElasticApi.properties    
+
+      volumes:
+        - name: siab-elastic-api-config
+          configMap:
+                name: siab-elastic-api-config

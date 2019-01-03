@@ -27,7 +27,11 @@ public class ConfigurationManager {
 	// private String elasticApiUrl = "http://10.1.50.27:31438"; //
 	// http://10.1.50.27:30601
 
-	private String elasticApiUrl = "http://logging-elasticsearch-client";
+	private String elasticsearchUrl = "http://logging-elasticsearch-client";
+	private String elasticsearchAddress = ""; // test purpose 10.1.50.27
+	private String elasticsearchPort = ""; // test purpose 31438
+	private String elasticsearchIndexFormat = ""; // test elastic index
+
 
 	private ConfigurationManager() {
 		readConfigFile();
@@ -51,16 +55,26 @@ public class ConfigurationManager {
 			try {
 				String serverPortString = props.getProperty("searchServerPort").trim();
 				serverPort = (serverPortString == null) ? 7070 : Integer.parseInt(serverPortString);
+				String elasticsearchUrlString = props.getProperty("elastic_search_url").trim();
+				elasticsearchUrl = elasticsearchUrlString;
+				String elasticsearchAddressString = props.getProperty("elastic_search_address").trim();
+				elasticsearchAddress = elasticsearchAddressString;
+				String elasticsearchPortString = props.getProperty("elastic_search_port").trim();
+				elasticsearchPort = elasticsearchPortString;
+				String elasticsearchIndexFormatString = props.getProperty("elastic_index_format").trim();
+				elasticsearchIndexFormat = elasticsearchIndexFormatString;
 
-				String elasticApiUrlString = props.getProperty("elastic.api.url").trim();
-
-				elasticApiUrl = elasticApiUrlString;
-
-				logger.debug("elastic.api.url:" + elasticApiUrl);
+				logger.debug("elasticsearch.url:" + elasticsearchUrl);
 				logger.debug("serverPort:" + serverPort);
+				logger.debug("elasticsearchAddress:" + elasticsearchAddress);
+				logger.debug("elasticsearchPort:" + elasticsearchPort);
+				logger.debug("elasticsearchIndexFormat:" + elasticsearchIndexFormat);
 
-				System.out.println("elastic.api.url:" + elasticApiUrl);
+				System.out.println("elasticsearch.url:" + elasticsearchUrl);
 				System.out.println("serverPort:" + serverPort);
+				System.out.println("elasticsearchAddress:" + elasticsearchAddress);
+				System.out.println("elasticsearchPort:" + elasticsearchPort);
+				System.out.println("elasticsearchIndexFormat:" + elasticsearchIndexFormat);
 
 			} catch (Exception e) {
 				serverPort = 7070;
@@ -82,11 +96,27 @@ public class ConfigurationManager {
 	}
 
 	public String getElasticApiUrl() {
-		return elasticApiUrl;
+		return elasticsearchUrl;
 	}
 
 	public void setElasticApiUrl(String elasticApiUrl) {
-		this.elasticApiUrl = elasticApiUrl;
+		this.elasticsearchUrl = elasticApiUrl;
+	}
+
+	public String getElasticsearchUrl() {
+		return elasticsearchUrl;
+	}
+
+	public void setElasticsearchUrl(String elasticsearchUrl) {
+		this.elasticsearchUrl = elasticsearchUrl;
+	}
+
+	public String getElasticsearchAddress() {
+		return elasticsearchAddress;
+	}
+
+	public void setElasticsearchAddress(String elasticsearchAddress) {
+		this.elasticsearchAddress = elasticsearchAddress;
 	}
 
 }
