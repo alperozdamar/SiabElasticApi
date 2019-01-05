@@ -1,0 +1,3 @@
+[DEBUG] 2019-01-04 14:04:34.080 [main] (SiabJUnitTest.java:89) - {"resource":"PSMO12345678","startTimeStamp":1542672000,"endTimeStamp":1542672000}
+[DEBUG] 2019-01-04 14:04:34.088 [main] (NetsiaJSonParser.java:75) - Incoming Query Parameters:Query [resource=PSMO12345678, startTimeStamp=1542672000, endTimeStamp=1542672000, granularity=null]
+[DEBUG] 2019-01-04 14:04:34.093 [main] (NetsiaJSonParser.java:128) - Build Json String as :{"query":{"bool":{"must":[{"match":{"serial_number":"PSMO12345678"}},{"match":{"serial_number":"PSMO12345678"}},{"match":{"type":"cord-kafka"}}],"filter":[{"range":{"timestamp":{"gte":"1542672000"}}},{"range":{"timestamp":{"lte":"1542672000"}}},{"term":{"kafka_topic":"onu.events"}}]}}}

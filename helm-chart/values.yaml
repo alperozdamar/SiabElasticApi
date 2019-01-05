@@ -15,11 +15,11 @@ fullnameOverride: ""
 service:
   type: NodePort
   port: 8085
-  nodePort: 8085
+  nodePort: 30888
 
 elasticsearch:
   searchServerPort: 8085
-  url: "http://elasticsearch:9200"
+  url: "http://logging-elasticsearch-client:9200"
   address: "elasticsearch"
   port: "9200"
   elasticIndexFormat: "logstash-"
