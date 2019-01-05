@@ -18,6 +18,8 @@ service:
   nodePort: 8085
 
 elasticsearch:
+  searchServerPort: 8085
+  url: "http://elasticsearch:9200"
   address: "elasticsearch"
   port: "9200"
   elasticIndexFormat: "logstash-"

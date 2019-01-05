@@ -3,7 +3,6 @@
 	<Properties>
 		<Property name="basePath">.</Property>
 	</Properties>
-
 	<Appenders>
 		<RollingFile name="fileLogger" fileName="${basePath}/logs/siabElasticApi.log"
 			filePattern="${basePath}/logs/siab-elastic-api-%d{yyyy-MM-dd}.log">

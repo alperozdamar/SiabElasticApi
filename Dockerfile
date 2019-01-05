@@ -3,5 +3,5 @@ ADD lib/siabElasticApi.jar siabElasticApi.jar
 ADD resources/siabElasticApi.properties resources/siabElasticApi.properties
 ADD src/main/resources/log4j2.xml src/main/resources/log4j2.xml 
 EXPOSE 8085
-ENTRYPOINT ["java","-Dlog4j.configuration=file:/src/main/resources/log4j.xml", "-jar","siabElasticApi.jar"]
+ENTRYPOINT ["java","-Dlog4j.configurationFile=file:/src/main/resources/log4j.xml", "-jar","siabElasticApi.jar"]
 

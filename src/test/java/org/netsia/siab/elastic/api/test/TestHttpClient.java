@@ -31,9 +31,9 @@ public class TestHttpClient {
 	public static void main(String[] args) throws Exception {
 		TestHttpClient httpClient = new TestHttpClient();
 
-		// String servletUrl = "http://10.1.50.27:32598/search";
+		String servletUrl = "http://10.1.50.27:30516/search"; // kubectl get services diyip port'u al...
 
-		String servletUrl = "http://localhost:8085/search";
+		// String servletUrl = "http://localhost:8085/search";
 
 		String resource = "PSMO12345678"; // onu serial number
 

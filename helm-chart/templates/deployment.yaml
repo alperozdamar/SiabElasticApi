@@ -1,22 +1,22 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ include "siab-elastic-api.fullname" . }}
+  name: {{ include "alperchart.fullname" . }}
   labels:
-    app: {{ include "siab-elastic-api.name" . }}
-    chart: {{ include "siab-elastic-api.chart" . }}
+    app: {{ include "alperchart.name" . }}
+    chart: {{ include "alperchart.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "siab-elastic-api.name" . }}
+      app: {{ include "alperchart.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ include "siab-elastic-api.name" . }}
+        app: {{ include "alperchart.name" . }}
         release: {{ .Release.Name }}
     spec:
       containers:
@@ -25,14 +25,29 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 8085
+              containerPort: 80
               protocol: TCP
           volumeMounts:
-            - name: siab-elastic-api-config
-              mountPath: /resources/siabElasticApi.properties
-              subPath: siabElasticApi.properties    
-
+            - name: {{ .Release.Name }}config
+              mountPath: ./resources
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
       volumes:
-        - name: siab-elastic-api-config
+        - name: {{ .Release.Name }}config
           configMap:
-                name: siab-elastic-api-config
+            name: alperconfig
+
+
+
