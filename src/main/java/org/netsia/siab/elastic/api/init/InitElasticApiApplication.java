@@ -16,6 +16,8 @@ import org.netsia.siab.elastic.config.ConfigurationManager;
 public class InitElasticApiApplication {
 	
 	
+	public static final int VERSION = 1;
+
 	  private static Logger logger = LogManager.getLogger(InitElasticApiApplication.class);
 
 	    public static void main(String[] args) {
@@ -38,7 +40,7 @@ public class InitElasticApiApplication {
 	            // Start things up!
 	            server.start();
 
-	            logger.debug("Server is started!");
+			logger.debug("Server is started! Version:" + VERSION);
 
 	            // The use of server.join() the will make the current thread join and
 	            // wait until the server is done executing.
