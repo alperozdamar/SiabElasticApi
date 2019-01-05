@@ -10,6 +10,31 @@ data:
         elastic_search_address={{ .Values.elasticsearch.address }}
         elastic_search_port={{ .Values.elasticsearch.port }}
         elastic_index_format={{ .Values.elasticsearch.elasticIndexFormat }}
-    log4j2.xml: |-
-        <?xml version="1.0" encoding="UTF-8"?><Configuration status="warn"><Properties><Property name="basePath">.</Property></Properties><Appenders><RollingFile name="fileLogger" fileName="${basePath}/logs/siabElasticApi.log"filePattern="${basePath}/logs/siab-elastic-api-%d{yyyy-MM-dd}.log"><PatternLayout><pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] (%F:%L) - %msg%n</pattern></PatternLayout><Policies><TimeBasedTriggeringPolicy interval="1" modulate="true" /></Policies></RollingFile><Console name="console" target="SYSTEM_OUT"><PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] (%F:%L) - %msg%n" /></Console></Appenders><Loggers><Logger name="org.netsia" level="debug" additivity="true"><appender-ref ref="fileLogger" level="debug" /></Logger><Root level="debug" additivity="false"><appender-ref ref="console" /></Root></Loggers></Configuration>
-
+    log4j2.properties: |-
+        status = error
+        name = PropertiesConfig
+        #Make sure to change log file path as per your need
+        property.filename = ./logs/siabElasticApi.log
+        filters = threshold
+        filter.threshold.type = ThresholdFilter
+        filter.threshold.level = debug
+        appenders = rolling
+        appender.rolling.type = RollingFile
+        appender.rolling.name = RollingFile
+        appender.rolling.fileName = ${filename}
+        appender.rolling.filePattern = debug-backup-%d{MM-dd-yy-HH-mm-ss}-%i.log.gz
+        appender.rolling.layout.type = PatternLayout
+        appender.rolling.layout.pattern = %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
+        appender.rolling.policies.type = Policies
+        appender.rolling.policies.time.type = TimeBasedTriggeringPolicy
+        appender.rolling.policies.time.interval = 1
+        appender.rolling.policies.time.modulate = true
+        appender.rolling.policies.size.type = SizeBasedTriggeringPolicy
+        appender.rolling.policies.size.size=10MB
+        appender.rolling.strategy.type = DefaultRolloverStrategy
+        appender.rolling.strategy.max = 20
+        loggers = rolling
+        logger.rolling.name = org.netsia
+        logger.rolling.level = debug
+        #logger.rolling.additivity = false
+        logger.rolling.appenderRef.rolling.ref = RollingFile
