@@ -1,5 +1,5 @@
 FROM openjdk:8
-ADD lib/siabElasticApi.jar siabElasticApi.jar 
+ADD target/siabElasticApi.jar siabElasticApi.jar 
 ADD resources/siabElasticApi.properties resources/siabElasticApi.properties
 ADD resources/log4j2.properties resources/log4j2.properties
 EXPOSE 8085

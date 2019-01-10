@@ -46,6 +46,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>siabElasticApi.jar</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -85,7 +86,7 @@
 						</resources>
 					</configuration>
 				</plugin>
-			</plugins>
+			</plugins>					
 		</pluginManagement>
 	</build>
 	<properties>
